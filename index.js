@@ -1,52 +1,116 @@
-// necesito compara la fecha de hoy con la fecha de nacimiento de un grupo de personas
-// y debe mostrarme las edades
-// debe estar en una tabla web
+function handleClick() {
 
-function calcularEdad(dia, mes, anio) {
-    const hoy = new Date();
-    const nacimiento = new Date(anio, mes - 1, dia);
+    const dia = Number(document.getElementById("dia").value);
+    const mes = Number(document.getElementById("mes").value);
+    const anio = Number(document.getElementById("anio").value);
 
-    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const resultado = document.getElementById("resultado");
+    const hoy = Temporal.Now.plainDateISO();
 
-    if (hoy.getMonth() < nacimiento.getMonth() ||
-        (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() < nacimiento.getDate())) {
-        edad--;
-    }
 
-    return edad;
-}
-
-function handleClick(event) {
-    const dia = Number(document.getElementById('dia').value);
-    const mes = Number(document.getElementById('mes').value);
-    const anio = Number(document.getElementById('anio').value);
-
-    if(dia < 1 || dia > 31) {
-        document.getElementById('resultado').textContent = "Numero de dia Invalido";
+    // Campos vacíos
+    if (!dia || !mes || !anio) {
+        resultado.textContent = "Completa todos los campos.";
         return;
     }
 
-    if(mes < 1|| mes > 12){
-        document.getElementById('resultado').textContent = "Numero de mes Invalido";
+
+    // Solo números enteros
+    if (
+        !Number.isInteger(dia) ||
+        !Number.isInteger(mes) ||
+        !Number.isInteger(anio)
+    ) {
+        resultado.textContent =
+            "Tu dato no es entero, cámbialo por un número entero.";
         return;
     }
 
-    if(anio < 1950) { 
-        document.getElementById('resultado').textContent = "Deberias comenzar a pensar si eres inmortal -_-"
+
+    // Día
+    if (dia < 1 || dia > 31) {
+        resultado.textContent = "Número de día inválido.";
         return;
     }
-    
-    const edad = calcularEdad(dia, mes, anio);
 
-    document.getElementById('resultado').textContent = "Tienes " + edad + " años ...";
 
+    // Mes
+    if (mes < 1 || mes > 12) {
+        resultado.textContent = "Número de mes inválido.";
+        return;
+    }
+
+
+    // Año
+    if (anio < 1950) {
+        resultado.textContent =
+            "Deberías comenzar a preguntarte si eres inmortal 🧐";
+        return;
+    }
+
+
+    try {
+
+        const nacimiento = Temporal.PlainDate.from(
+            {
+                year: anio,
+                month: mes,
+                day: dia
+            },
+            {
+                overflow: "reject"
+            }
+        );
+
+
+        // Fecha futura
+        if (Temporal.PlainDate.compare(nacimiento, hoy) > 0) {
+            resultado.textContent =
+                "Todavía no has nacido 🤨";
+            return;
+        }
+
+
+        // Calcular años, meses y días
+        const edad = nacimiento.until(hoy, {
+            largestUnit: "years"
+        });
+
+
+        // Crear mensaje
+        let mensaje =
+            "Tienes " +
+            edad.years + " años, " +
+            edad.months + " meses y " +
+            edad.days + " días.";
+
+
+        // Cumpleaños
+        if (
+            hoy.day === dia &&
+            hoy.month === mes
+        ) {
+            mensaje += " ¡Feliz cumpleaños! 🎉";
+        }
+
+
+        resultado.textContent = mensaje;
+
+
+    } catch {
+
+        resultado.textContent =
+            "La fecha ingresada no existe.";
+    }
 }
 
-function main(){
-    const button = document.getElementById('myBtn');
-    button.addEventListener('click', handleClick);
+
+function main() {
+
+    document
+        .getElementById("myBtn")
+        .addEventListener("click", handleClick);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-   main()
-});
+
+document.addEventListener("DOMContentLoaded", main);
