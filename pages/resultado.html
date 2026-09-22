@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado de Edad</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(30, 45, 65);
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .contenedor {
+            background-color: rgba(205, 219, 236, 0.801);
+            width: 450px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        #resultado {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(27, 18, 156);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background-color: #223bcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h2>Resultado</h2>
+
+        <p id="resultado"></p>
+
+        <a href="index.html">
+            Volver
+        </a>
+
+    </div>
+
+    <script>
+        const resultado = localStorage.getItem("resultadoEdad");
+
+        document.getElementById("resultado").textContent = resultado;
+    </script>
+
+</body>
+
+</html>

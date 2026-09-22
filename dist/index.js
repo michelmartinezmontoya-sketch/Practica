@@ -62,7 +62,8 @@ function handleClick() {
             hoy.month === mes) {
             mensaje += " ¡Feliz cumpleaños! 🎉";
         }
-        resultado.textContent = mensaje;
+        localStorage.setItem("resultadoEdad", mensaje);
+        window.location.href = "resultado.html";
     }
     catch {
         resultado.textContent =
