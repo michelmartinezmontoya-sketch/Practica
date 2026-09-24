@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retro Invaders</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: "Courier New", monospace;
+            color: white;
+            text-align: center;
+
+            background-color: #050510;
+
+            background-image:
+                radial-gradient(#ffffff 1px, transparent 1px),
+                radial-gradient(#ff4fc3 1px, transparent 1px),
+                radial-gradient(#4cffc7 1px, transparent 1px);
+
+            background-size:
+                45px 45px,
+                80px 80px,
+                110px 110px;
+
+            background-position:
+                0 0,
+                20px 30px,
+                50px 10px;
+        }
+
+        h2 {
+            margin-top: 25px;
+            font-size: 32px;
+            letter-spacing: 4px;
+            color: #ff4fc3;
+        }
+
+        .subtitulo {
+            color: #4cffc7;
+            font-size: 16px;
+        }
+
+        #puntos {
+            font-size: 20px;
+            color: #ffe85c;
+            font-weight: bold;
+        }
+
+        .marco {
+            width: 540px;
+            margin: 20px auto;
+            padding: 15px;
+
+            border: 3px solid #ff4fc3;
+
+            background-color: #11111f;
+        }
+
+        #juego {
+            width: 500px;
+            height: 500px;
+
+            margin: 20px auto;
+
+            position: relative;
+            overflow: hidden;
+
+            background-color: black;
+
+            background-image:
+                linear-gradient(#19192a 1px, transparent 1px),
+                linear-gradient(90deg, #19192a 1px, transparent 1px);
+
+            background-size: 25px 25px;
+
+            border: 3px solid #4cffc7;
+        }
+
+        #nave {
+            width: 50px;
+            height: 25px;
+
+            background-color: #4cffc7;
+
+            position: absolute;
+
+            bottom: 20px;
+            left: 225px;
+
+            clip-path: polygon(
+                50% 0%,
+                100% 100%,
+                0% 100%
+            );
+        }
+
+        .enemigo {
+            width: 35px;
+            height: 35px;
+
+            position: absolute;
+
+            background-color: #ff4fc3;
+
+            border-radius: 50%;
+        }
+
+        .bala {
+            width: 5px;
+            height: 15px;
+
+            background-color: #ffe85c;
+
+            position: absolute;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>SALA DE ESPERA </h2>
+
+    <p class="subtitulo">
+        CALCULANDO TU EDAD...
+    </p>
+
+    <div class="marco">
+
+        <p class="subtitulo">
+            Usa las flechas para moverte y ESPACIO para disparar
+        </p>
+
+        <p id="puntos">
+            SCORE: 0 / 5
+        </p>
+
+        <div id="juego">
+
+            <div id="nave"></div>
+
+        </div>
+
+    </div>
+
+    <script src="../dist/juego.js"></script>
+
+</body>
+
+</html>

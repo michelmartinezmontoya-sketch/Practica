@@ -45,6 +45,13 @@
         a:hover {
             background-color: #223bcc;
         }
+
+        .resultado-box {
+            background-color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
     </style>
 </head>
 
@@ -54,14 +61,18 @@
 
         <h2>Resultado</h2>
 
+    <div class = "resultado-box">
         <p id="resultado"></p>
-
+<!-- esta parte sigifnca "Cuando haga click abre index.html",
+ osea vuelve a la pagina principal-->
         <a href="index.html">
             Volver
         </a>
 
     </div>
 
+<!-- esta parte busca lo que se guardo en el navegador
+    anteriormente en index.ts-->
     <script>
         const resultado = localStorage.getItem("resultadoEdad");
 

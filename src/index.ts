@@ -17,6 +17,7 @@ function handleClick(): void {
     const resultado = document.getElementById("resultado")!;
     const hoy = Temporal.Now.plainDateISO();
 
+// Condiciones para escribir la fecha 
 
     if (!dia || !mes || !anio) {
         resultado.textContent = "Completa todos los campos.";
@@ -53,7 +54,7 @@ function handleClick(): void {
         return;
     }
 
-
+// esta parte deteca fechas inexistentes es decir como el 31 de febrero
     try {
 
         const nacimiento = Temporal.PlainDate.from(
@@ -67,6 +68,7 @@ function handleClick(): void {
             }
         );
 
+//  esto ve si es una fecha futura y el calculo de edad hasta hoy 
 
         if (Temporal.PlainDate.compare(nacimiento, hoy) > 0) {
             resultado.textContent =
@@ -79,6 +81,7 @@ function handleClick(): void {
             largestUnit: "years"
         });
 
+// aqui suelta el mensaje a la persona y revisa si es su cumpleaños
 
         let mensaje =
             "Tienes " +
@@ -94,10 +97,12 @@ function handleClick(): void {
             mensaje += " ¡Feliz cumpleaños! 🎉";
         }
 
-
+// esto guarda el mensaje en el navegador, permitiendo que otra pagina
+// lo pueda leer
         localStorage.setItem("resultadoEdad", mensaje);
 
-        window.location.href = "resultado.html";
+// este codigo manda al usuario a la segunda pagina         
+        window.location.href = "minijuego.html";
 
 
     } catch {
@@ -107,12 +112,20 @@ function handleClick(): void {
     }
 }
 
+// esto espera y activa el main cuando se hace el click
+// en "calcular edad" y espera a que el HTML se cargue primero 
 
 function main(): void {
 
     document
         .getElementById("myBtn")!
         .addEventListener("click", handleClick);
+
+    document.addEventListener("keydown", function(event){
+        if (event.key === "Enter") {
+            handleClick();
+        }
+    });
 }
 
 
